@@ -1,0 +1,13 @@
+# Training settings for DubinsCar
+DubinsCar:
+  --algo: plangcbf+
+  --env: DubinsCar
+  --load-dir: ./pretrained/DubinsCar/gcbf+/models/
+  --spec: cover3 # seq3, 2branch2
+  --spec-len: 15
+  --goal-sample-interval: 30
+  --horizon: 32
+  --area-size: 4
+  --lr-actor: 3e-5
+  --lr-cbf: 3e-5
+  --loss-action-coef: 1e-5

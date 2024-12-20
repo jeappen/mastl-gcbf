@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gcbfplus"
+version = "0.1.0"
+description = 'Jax Official Implementation of CoRL Paper: Joe Eappen, Zikang Xiong, Dipam Patel, Aniket Bera, Suresh Jagannathan: Scaling Safe Multi-Agent Control for Signal Temporal Logic Specifications'
+readme = "README.md"
+authors = [{ name = "Joe Eappen", email = "jeappen@purdue.edu"}]
+license = {file = "LICENSE"}
+
+classifiers = [
+  "Development Status :: 3 - Alpha",
+
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3 :: Only",
+]
+dependencies = ["jax"]
+
+[project.urls]
+"Homepage" = "https://www.jeappen.com/mastl-gcbf-website/"
+"Bug Reports" = "https://github.com/pypa/sampleproject/issues"
+"Funding" = "https://donate.pypi.org"
+"Say Thanks!" = "http://saythanks.io/to/example"
+"Source" = "https://github.com/jeappen/mastl-gcbf"

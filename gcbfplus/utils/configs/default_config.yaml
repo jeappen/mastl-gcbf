@@ -1,0 +1,81 @@
+# All the default options unless specified in the runtime config
+training_params:
+  loss_report_interval: 60
+  checkpoint_interval: 120  # TODO: Use this in ray
+  timeout_value: 3600
+  max_step: 256  # Usually not used (factor of 8 to play nice with other algorithms)
+  debug: False
+  inner_epoch: 8
+  ds_params:
+    #  Parameters for the diff spec framework
+    HARDNESS: 3.0
+    include_start_state: True  # For the STL Score evaluations
+    shrink_factor: 0.3  #  How much to shrink the goal region for STLPy solver paths to reach goal
+  ray_params: # Default Parameters for the ray framework
+    num_chkpts_to_keep: 3
+
+planner_params:
+  #  Parameters for the planner if not specified in the planner config
+  planner: "ode"  #  gnn-ode|gnn-ode-feature|ode|milp (for testing)
+  lr: 1e-4
+  mb_train_subset_size: 64
+  max_difference: 10
+  hidden_arch: [ 64, 64 ]
+  phi_dim: 256
+  gnn_feature_size: 128
+  #  gnn_feature_size: 1024
+  gnn_hidden_size: [ 256, 128, 32 ] # Reduced from actor parameters
+  gnn_hid_size_msg: [ 128, 128 ]  # Reduced from [256, 256] to improve memory usage
+  gnn_hid_size_aggr: [ 128, 128 ]
+  gnn_hid_size_update: [ 128, 128 ] # Reduced from [256, 256] to improve memory usage
+  gnn_msg_dim: 128
+  #  gnn_hidden_size: [ 256, 128, 32 ]
+  mlp_hid_size: [ 128, 128 ]
+  planner_gnn_layers: 2  # Number of GNN layers in the planner to get long term dependencies
+  plan_length: 10  # Make this part of the runtime config
+  goal_sample_interval: 10  # How often to sample goals
+  planner_lr_clip: 1e-3
+  ode_ip_embedding_size: 16  # ODE-based planner input embedding state size (beyond goal)
+  use_gnn_goal: False  # Use first GNN goal in the plan
+
+  # NN planner loss weights
+  plan_stl_loss_coeff: 0.1
+  real_stl_loss_coeff: 1.0
+  achievable_loss_coeff: 0.1
+  achievable_loss_form: 'mean'  # 'max' | 'mean'
+  stop_planner_rollout_grad: False  # Stop the planner rollout gradient at previous observation
+  skip_actor_update: True  # Skip actor update in the planner (use pretrained actor)
+  achievable_single_step_target: True  # Use single step ODE target for achievable loss (otherwise use the full plan/ saved plan)
+
+  # STL loss update intervals
+  single_optimizer: True  # Optimize a summation of losses with a single optimizer (True: single optimizer, False: multiple optimizers)
+  update_interval_mode: 'slow'  # Relevant in non-single optimizer. ('simple' | 'slow')
+  real_stl_update_interval: 5  # How often to update the real STL loss
+  achievable_update_interval: 3  # How often to update the achievable loss (prioritizing the real STL loss)
+  slow_update_duration: 5  # How many steps to wait before switching update
+  slow_update_proportions: [ 0, 3, 2 ]  # Proportions of the slow update intervals (real STL, plan_stl, achievable STL)
+  update_interval_step_index: 0  # Step index for the slow update intervals (0: step, 1: inner epoch, 2: batch step)
+  achievable_warmup_period: 100  # How many steps to wait before starting the achievable loss update
+
+  # Extra features to add to GNN embeddings
+  add_extra_features: True
+  # TODO: Think about the path of the extra features, see gradient values
+  extra_features: None # "states" | "u_ref" | "goals" | "current_time"
+
+  # Extra features to add to GNN obs
+  add_aux_features: False  # Add auxiliary features to the GNN node features (used in the GNN-ODE planner)
+
+  # Asynchronous Planner
+  async_planner: True  # Use distance to goal for async planner
+  async_reach_radius: 0.4  # Reach threshold for the async planner
+
+env_params:
+  # Parameters for the environment
+  sinkhole: [ 3.0, 3.0 ]
+  goal_size: 1.0
+  vanish_on_end: False  # Vanish or Land the agent on reaching the end of its plan
+
+dir_params:
+  #  Directory paths
+  log_dir: /data/joe/gcbf
+  data_dir: /data/joe/gcbf
