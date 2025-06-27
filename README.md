@@ -2,7 +2,7 @@
 
 ![jax_badge][jax_badge_link]
 
-Official Implementation of Paper: [Joe Eappen](https://jeappen.com), [Zikang Xiong](https://xiong.zikang.me/), [Dipam Patel](https://www.dipampatel.in/), [Aniket Bera](https://www.cs.purdue.edu/homes/ab/),  [Suresh Jagannathan](https://www.cs.purdue.edu/homes/suresh/): "[Scaling Safe Multi-Agent Control for Signal Temporal Logic Specifications](https://mit-realm.github.io/gcbfplus-website/)".
+Official Implementation of Paper: [Joe Eappen](https://jeappen.com), [Zikang Xiong](https://xiong.zikang.me/), [Dipam Patel](https://www.dipampatel.in/), [Aniket Bera](https://www.cs.purdue.edu/homes/ab/),  [Suresh Jagannathan](https://www.cs.purdue.edu/homes/suresh/): "[Scaling Safe Multi-Agent Control for Signal Temporal Logic Specifications](https://mit-realm.github.io/gcbfplus-website/](https://www.jeappen.com/mastl-gcbf-website/)".
 
 ## Main File Structure
 ```
